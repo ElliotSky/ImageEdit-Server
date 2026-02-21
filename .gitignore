@@ -100,6 +100,16 @@ build/
 temp.*/
 *.cpython-*.so
 
+# GroundingDINO specific - exclude large files and third-party libraries
+GroundingDINO/bert-base-uncased/
+GroundingDINO/build/
+GroundingDINO/groundingdino.egg-info/
+GroundingDINO/demo/diffusers/
+GroundingDINO/demo/out/
+GroundingDINO/logs/
+GroundingDINO/*.so
+GroundingDINO/weights/*.pth
+
 # NVIDIA drivers (large files)
 NVIDIA-Linux-*.run
 
