@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Image: 文本驱动的精准图像生成</title>
+    <link rel="stylesheet" href="{% static 'html/left.css' %}">
+    <link rel="stylesheet" href="{% static 'html/middle.css' %}">
+    <link rel="stylesheet" href="{% static 'html/right.css' %}">
+    <link rel="stylesheet" href="{% static 'html/modal.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="site-name">Text-to-Image: 文本驱动的精准图像生成</div>
+        <div class="buttons">
+            <button id="object-detection-btn">目标检测教程</button>
+            <button id="image-generation-btn">生成图像教程</button>
+        </div>
+    </div>
+    <div class="container">
+        <!-- 左区：信息展示区 -->
+        <div class="left">
+            <div class="left-half">
+                <div class="info-display">
+                    <p id="displayTextTop">lora</p>
+                </div>
+                <div class="carousel" id="carouselTop">
+                    <div class="carousel-inner">
+                        <img src="{% static 'img/image1.jpeg' %}" alt="图片1">
+                        <img src="{% static 'img/image2.jpeg' %}" alt="图片2">
+                        <img src="{% static 'img/image3.png' %}" alt="图片3">
+                        <img src="{% static 'img/image4.png' %}" alt="图片4">
+                    </div>
+                </div>
+                <div class="select-content">
+                    <label for="contentSelectTop">请选择lora:</label>
+                    <select id="contentSelectTop">
+                        <option value="last_dyj-000001.safetensors">卡通lora_原创</option>
+                        <option value="jianbihua_v1.0.safetensors">简笔画lora</option>
+                        <option value="last_dyj.safetensors">卡通lora00_原创</option>
+                        <option value="Zip_Lora_2.0-000009.safetensors">Zip_Lora</option>
+                        <option value="3dzujianV3-000010.safetensors">3Dlora</option>
+                        <option value="Clay_style.safetensors">黏土lora</option>
+                        <option value="DragonBoatFestival.safetensors">端午节lora</option>
+                        <option value="nolora">nolora</option>
+                    </select>
+                </div>
+            </div>
+            <div class="left-half">
+                <div class="info-display">
+                    <p id="displayTextBottom">model</p>
+                </div>
+                <div class="carousel" id="carouselBottom">
+                    <div class="carousel-inner">
+                        <img src="{% static 'img/model1.png' %}" alt="图片1">
+                        <img src="{% static 'img/model1.png' %}" alt="图片2">
+                        <img src="{% static 'img/model1.png' %}" alt="图片3">
+                        <!-- 更多图片... -->
+                    </div>
+                </div>
+                <div class="select-content">
+                    <label for="contentSelectBottom">请选择model:</label>
+                    <select id="contentSelectBottom">
+                        <option value="gligen-1-4-inpainting-text-box">gligen-1-4-inpainting-text-box</option>
+                        <option value="stable-diffusion-v1-5">stable-diffusion-v1-5</option>
+                        <option value="diffusers-inpainting-text-box">diffusers-inpainting-text-box</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="object-detection-popup" class="popup" style="max-width: 400px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; font-size: 24px; color: #333;">目标检测教程</h2>
+            
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 1: 上传图片</span><br>
+                点击页面中的“<b>上传图片</b>”按钮，上传你想要编辑的图片
+            </p>
+            
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 2: 点击目标检测</span><br>
+                在图片成功上传后，页面将显示“目标检测”按钮<br>
+                点击“<b>目标检测</b>”按钮开始进入目标检测流程
+            </p>
+            
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 3: 输入提示词</span><br>
+                在弹出的对话框中，输入一句描述您希望编辑的目标的<b>英文</b>句子<br>
+                提示词应准确描述您希望系统能够识别的物体
+            </p>
+            
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 4: 等待处理</span><br>
+                等待系统进行目标检测，通常处理时间不超过<b>10秒</b><br>
+                一旦处理完成，检测结果会在预览图区域展示
+            </p>
+            
+            <h3 style="margin-top: 20px; font-size: 18px; color: #333;">案例：</h3>
+            <p style="margin-bottom: 10px;">
+                假设您上传了一张包含多个物体的图片，如一张山区照片。您希望对山间的白色城堡进行编辑。在提示词中输入：“The big white castle in the middle”或“castle”，系统将会框出城堡的位置。
+            </p>
+            
+            <button style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;" onclick="closePopup('object-detection-popup')">关闭</button>
+        </div>
+        
+        <div id="image-generation-popup" class="popup" style="max-width: 400px; padding: 20px; background-color: #f9f9f9; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; font-size: 24px; color: #333;">生成图像教程</h2>
+            
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 1: 选择模型与lora</span><br>
+                在左侧下拉列表选择“<b>模型</b>”与“<b>lora</b>”，不选择会有默认值
+            </p>
+            
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 2: 输入文本描述</span><br>
+                在模型选择后，输入您希望生成图像的<b>英文文本描述</b><br>
+                <b>特别注意：每个检测框都需要对应的提示词，不同框之间的提示词使用空格隔开，针对一个框的提示词需要使用“_”字符连接</b><br>
+                例如：“green_roses red_roses blue_roses”<br>
+                <b>提示词根据空格拆分后与检测框数量不符合，会报错</b><br>
+            </p>   
+            <p style="margin-bottom: 10px;">
+                <span class="highlight" style="font-weight: bold;">步骤 3: 生成图像</span><br>
+                点击“<b>回车键</b>”按钮开始生成基于您输入的文本描述的图像
+            </p>
+            
+            <h3 style="margin-top: 20px; font-size: 18px; color: #333;">案例：</h3>
+            <p style="margin-bottom: 10px;">
+                假设您已经完成了山区风景图的树目标检测，检测图中有两个检测框，你希望把树改成玫瑰，那你需要输入“green_roses red_roses blue_roses”作为描述,系统会将树编辑成对应的玫瑰。
+            </p>
+            
+            <button style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer;" onclick="closePopup('image-generation-popup')">关闭</button>
+        </div>
+        
+
+ 
+        <div class="middle">
+            <!-- 中间内容 -->
+            <div class="main-content">
+                <h1>欢迎来到Text-to-Image</h1>
+                <p>探索最新的文本驱动图像生成技术<a href="#" id="openTutorial">（使用教程）</a></p>
+                <p style="font-size: 10px;">开发者注：由于后端尚未实现模型预加载，每次生成都需要重新加载模型，所以呈现到前端会有许多额外的耗时</p>
+                <p style="font-size: 10px;">针对这个问题，优化有些困难，但我们团队正在探索解决方案，非常抱歉！</p>
+            </div>
+            <div id="imagePreview">
+                <img src="https://software.hebtu.edu.cn/template/44//images/b1.jpg" alt="请上传图片" class="preview-image" id="previewImage"/>
+              </div>
+      
+            <div class="button-group">
+              <button id="customUploadButton" class="upload-btn">上传图片</button>
+              <input type="file" id="uploadImageButton" style="display:none;">
+              <div id="actionButtons" class="action-buttons hidden">
+                  <!-- <button id="handdetect">手动画框</button> -->
+                  <button id="autodetect">目标检测</button>
+                  <button id="generateButton">开始生成</button>
+              </div>
+            </div>
+        </div>
+        <!-- 弹出的视频框 -->
+        <div id="tutorialModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <iframe width="560" height="315" src="{% static 'teacher.mp4' %}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- 右区 -->
+        <div class="right">
+            <!-- 右侧内容 -->
+             <p>生成效果展示：</p>
+            <div class="image-display">
+                  <img id="serverImage0" src="{% static 'img/test.png' %}" alt="从服务器加载的图片" style="width: 70%; height: auto;">
+                  <img id="serverImage1" src="{% static 'img/test.png' %}" alt="从服务器加载的图片" style="width: 70%; height: auto; display: none;">
+            </div>
+          </div>
+        </div>
+
+    <script src="{% static 'html/aidraw_script_new.js' %}"></script>
+    <script src="{% static 'html/left_info_show_new.js' %}"></script>
+    <script src="{% static 'html/modal.js' %}"></script>
+</body>
+</html>

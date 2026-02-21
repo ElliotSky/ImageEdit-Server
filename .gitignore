@@ -1,0 +1,119 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Django
+*.log
+*.pot
+*.pyc
+db.sqlite3
+db.sqlite3-journal
+/media
+/staticfiles
+/static_root
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Model weights and large files
+*.pth
+*.pt
+*.bin
+*.safetensors
+weights/
+*.h5
+*.ckpt
+
+# Large binary files
+*.run
+*.zip
+*.rpm
+*.deb
+*.tar.gz
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+log/
+logs/
+*.out
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Project specific
+/data/
+/home/
+bert-base-uncased/
+groundingdino.egg-info/
+build/
+temp.*/
+*.cpython-*.so
+
+# NVIDIA drivers (large files)
+NVIDIA-Linux-*.run
+
+# MySQL installers
+mysql-*.zip
+mysql*.rpm
+
+# Output directories
+out/
+output/
+detect_output/
+
+# Test and temporary files
+djo.out
+*.out
+scripts/*.ipynb
+

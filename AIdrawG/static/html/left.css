@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0c0c0c;
+    color: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.navbar .site-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+.navbar .buttons {
+    display: flex;
+    gap: 20px;
+}
+.navbar button {
+    background-color: #FB8C00;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.navbar button:hover {
+    background-color: #FFB74D;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.container {
+    display: flex;
+    height: calc(100vh - 60px); /* Adjust height to exclude navbar height */
+}
+.left, .center, .right {
+    padding: 20px;
+}
+.left {
+    flex: 1 1 20%;
+    background-color: #f1f1f1;
+    border-right: 1px solid #bdc3c7;
+    overflow-y: auto;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.left::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.center {
+    flex: 1 1 40%;
+    background-color: #ffffff;
+    border-right: 1px solid #bdc3c7;
+}
+.right {
+    flex: 1 1 40%;
+    background-color: #f1f1f1;
+}
+.left-half {
+    margin-bottom: 20px;
+}
+.info-display {
+    margin-bottom: 10px;
+}
+.info-display p {
+    font-size: 18px;
+    font-weight: bold;
+}
+.carousel {
+    width: 100%;
+    height: 200px; /* 固定轮播图区域的高度 */
+    overflow: hidden;
+    margin-bottom: 10px;
+    position: relative;
+}
+.carousel-inner {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+.carousel-inner img {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    /* padding: 15%; */
+    object-fit: cover; /* 确保图片自适应容器 */
+    border-radius: 8px;
+}
+.select-content {
+    margin-bottom: 20px;
+}
+.select-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.select-content select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
